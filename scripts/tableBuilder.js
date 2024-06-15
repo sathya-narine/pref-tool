@@ -20,12 +20,8 @@ window.fillTable = function fillTable() {
     selection.forEach(element => label.push(titles[element])); // Put each selected title into a new array.
     // commenting prevoius code which was calculating wrong percentage
     //options.forEach(element => percents.push(Math.round(element*100/total))); // Put each percentage into a new array.
-    // sathya testing display values to debug
-    alert('total is '+total);
-    alert('next is options');
-    alert(options.toString());
-
-    // sathya code fix
+    
+    // code fix
     var n = titles.length;
     var factor = n - 1;
     // Calculate percents for each element in options array
