@@ -19,7 +19,11 @@ window.fillTable = function fillTable() {
     let total = options.reduce((i,j) => i+j, 0) // The total number of selections for all options.
     selection.forEach(element => label.push(titles[element])); // Put each selected title into a new array.
     options.forEach(element => percents.push(Math.round(element*100/total))); // Put each percentage into a new array.
-
+    // sathya testing display values to debug
+    alert('total is '+total);
+    alert('next is options');
+    alert(options.toString());
+    
     table.innerHTML = ""; // Clear the table.
 
     // For each original selection...
