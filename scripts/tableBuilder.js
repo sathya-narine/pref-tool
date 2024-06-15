@@ -18,11 +18,22 @@ window.fillTable = function fillTable() {
     let percents = [];
     let total = options.reduce((i,j) => i+j, 0) // The total number of selections for all options.
     selection.forEach(element => label.push(titles[element])); // Put each selected title into a new array.
-    options.forEach(element => percents.push(Math.round(element*100/total))); // Put each percentage into a new array.
+    // commenting prevoius code which was calculating wrong percentage
+    //options.forEach(element => percents.push(Math.round(element*100/total))); // Put each percentage into a new array.
     // sathya testing display values to debug
     alert('total is '+total);
     alert('next is options');
     alert(options.toString());
+
+    // sathya code fix
+    var n = titles.length;
+    var factor = n - 1;
+    // Calculate percents for each element in options array
+    for (var i = 0; i < options.length; i++) {
+        var percent = (options[i] / factor) * 100;
+        percents.push(percent);
+    }
+
     
     table.innerHTML = ""; // Clear the table.
 
