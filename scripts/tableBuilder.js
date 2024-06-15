@@ -21,7 +21,7 @@ window.fillTable = function fillTable() {
     // commenting prevoius code which was calculating wrong percentage
     //options.forEach(element => percents.push(Math.round(element*100/total))); // Put each percentage into a new array.
     
-    // code fix
+    // code fix for calculating percentage
     var n = titles.length;
     var factor = n - 1;
     // Calculate percents for each element in options array
