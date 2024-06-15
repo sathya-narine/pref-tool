@@ -9,7 +9,18 @@ var label = [];
 var percent = [];
 var total = option.reduce((i,j) => i+j, 0) // The total number of selections for all options.
 selection.forEach(element => label.push(titles[element])); // Put each title into a new array.
-option.forEach(element => percent.push(Math.round(element*100/total))); // Calculate and store each percentage.
+// commenting prevoius code which was calculating wrong percentage
+//option.forEach(element => percent.push(Math.round(element*100/total))); // Calculate and store each percentage.
+// code fix
+var n = titles.length;
+var factor = n - 1;
+// Calculate percents for each element in options array
+for (var i = 0; i < option.length; i++) {
+    var percent = (option[i] / factor) * 100;
+    percent = parseFloat(percent.toFixed(2));  // Round to two decimal places
+    percents.push(percent);
+}
+
 
 // Defines a new chart object with information as specified by the user's choices.
 const myChart = new Chart(ctx, {
