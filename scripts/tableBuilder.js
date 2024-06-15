@@ -31,6 +31,7 @@ window.fillTable = function fillTable() {
     // Calculate percents for each element in options array
     for (var i = 0; i < options.length; i++) {
         var percent = (options[i] / factor) * 100;
+        percent = parseFloat(percent.toFixed(2));  // Round to two decimal places
         percents.push(percent);
     }
 
