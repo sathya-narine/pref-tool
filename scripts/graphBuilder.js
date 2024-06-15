@@ -6,7 +6,7 @@ const selection = cookieParse("selection"); // Get all selected videos.
 const titles = cookieParse("titles2");
 const option = cookieParse("option"); // Get counts for how many times each option has been chosen.
 var label = [];
-var percent = [];
+var percents = [];
 var total = option.reduce((i,j) => i+j, 0) // The total number of selections for all options.
 selection.forEach(element => label.push(titles[element])); // Put each title into a new array.
 // commenting prevoius code which was calculating wrong percentage
@@ -30,7 +30,7 @@ const myChart = new Chart(ctx, {
     labels: label,
     datasets: [{
       // we can get the data from any variable for this one
-      data: percent,
+      data: percents,
       backgroundColor: "black", 
       },
     ],
