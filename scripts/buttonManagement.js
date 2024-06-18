@@ -144,8 +144,11 @@ window.fillButtons = function fillButtons(){
         $("#option2").append(image2);
 
         // Add listeners to the images to check for when the user selects an image.
-        $("#option1").click(function(){selectOption(0)});
-        $("#option2").click(function(){selectOption(1)});
+        // $("#option1").click(function(){selectOption(0)});
+        // $("#option2").click(function(){selectOption(1)});
+        // new fix 
+        $("#detector1").click(function(){selectOption(0)});
+        $("#detector2").click(function(){selectOption(1)});
     }
 }
 
