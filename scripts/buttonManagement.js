@@ -18,9 +18,10 @@ window.selectOption = function selectOption(optionIndex){
 
     // Read the user's cookies.
     let option = cookieParse("option");
+
     option[cookieParse("combination")[index][optionIndex]]++; // Increment the appropriate selection.
     setCookie("option",JSON.stringify(option),5); // Store the user's selections again. 5 days until expiry.
-
+    
     if (optionIndex == 0) {
         let count = parseInt(getCookie("option1")) + 1;
         setCookie("option1", count, 5);
@@ -145,7 +146,7 @@ window.fillButtons = function fillButtons(){
         // Add listeners to the images to check for when the user selects an image.
         $("#option1").click(function(){selectOption(0)});
         $("#option2").click(function(){selectOption(1)});
-       
+    }
 }
 
 /*
