@@ -34,15 +34,17 @@ window.selectOption = function selectOption(optionIndex){
         alert('option 1 selected');
         alert(count);
         setCookie("option1", count, 5);
+        modalEnable(optionIndex); // Display pop-up with the user's selected video.
     } else if (optionIndex == 1) {
         let count = parseInt(getCookie("option2")) + 1;
         alert('option 2 selected');
         alert(count);
         setCookie("option2", count, 5);
+        modalEnable(optionIndex); // Display pop-up with the user's selected video.
         
     }
 
-    modalEnable(optionIndex); // Display pop-up with the user's selected video.
+    //modalEnable(optionIndex); // Display pop-up with the user's selected video.
 
     idleTimeout = setTimeout(resetButtons,playtimeLength); // Calls resetButtons after an amount of time determined by playtimeLength.
 }
