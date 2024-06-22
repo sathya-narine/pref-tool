@@ -13,21 +13,29 @@ var playtimeLength = getCookie("playtime")*1000; // How long to play a user's se
     Remarks: optionIndex == 0 corresponds to left/top and optionIndex == 1 corresponds to right/bottom.
 */
 window.selectOption = function selectOption(optionIndex){
+    alert('Inside Select Option');
+    alert(optionIndex);
 
     clearTimeout(idleTimeout); // Stop the timeout.
 
     // Read the user's cookies.
     let option = cookieParse("option");
+    alert(option.toString());
 
     option[cookieParse("combination")[index][optionIndex]]++; // Increment the appropriate selection.
     setCookie("option",JSON.stringify(option),5); // Store the user's selections again. 5 days until expiry.
     
     if (optionIndex == 0) {
         let count = parseInt(getCookie("option1")) + 1;
+        alert('option 1 selected');
+        alert(count);
         setCookie("option1", count, 5);
     } else if (optionIndex == 1) {
         let count = parseInt(getCookie("option2")) + 1;
+        alert('option 2 selected');
+        alert(count);
         setCookie("option2", count, 5);
+        
     }
 
     modalEnable(optionIndex); // Display pop-up with the user's selected video.
