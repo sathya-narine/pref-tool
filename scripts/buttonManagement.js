@@ -142,7 +142,9 @@ window.fillButtons = function fillButtons(){
         $("iframe").css("pointer-events","none");
 
         // Add listeners to the detectors to check for when the user selects a video.
+        alert('video playback calling select Option ---1');
         $("#detector1").click(function(){selectOption(0)});
+        alert('video playback calling select Option ---2');
         $("#detector2").click(function(){selectOption(1)});
     }
     else {
@@ -156,7 +158,9 @@ window.fillButtons = function fillButtons(){
         $("#option2").append(image2);
 
         // Add listeners to the images to check for when the user selects an image.
+        alert('still images calling select Option --1');
         $("#option1").click(function(){selectOption(0)});
+        alert('still images calling select Option --2');
         $("#option2").click(function(){selectOption(1)});
     }
 }
