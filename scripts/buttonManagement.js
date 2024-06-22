@@ -16,6 +16,10 @@ window.selectOption = function selectOption(optionIndex){
     alert('Inside Select Option');
     alert(optionIndex);
 
+    if (optionIndex === null || optionIndex === undefined || optionIndex === '') {
+        alert("Value not passed");
+    }
+
     clearTimeout(idleTimeout); // Stop the timeout.
 
     // Read the user's cookies.
