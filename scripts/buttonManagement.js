@@ -115,6 +115,10 @@ window.fillButtons = function fillButtons(){
     // Reset visibility to show options correctly.
     $(".outer").css("display","block")
 
+    // Remove previous event listeners to avoid multiple calls
+    $("#option1").off('click');
+    $("#option2").off('click');
+
     // Check whether the user wants still images or videos.
     if(getCookie("presentation") == "video"){
 
