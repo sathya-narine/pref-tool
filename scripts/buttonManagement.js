@@ -13,32 +13,35 @@ var playtimeLength = getCookie("playtime")*1000; // How long to play a user's se
     Remarks: optionIndex == 0 corresponds to left/top and optionIndex == 1 corresponds to right/bottom.
 */
 window.selectOption = function selectOption(optionIndex){
-    alert('Inside Select Option');
-    alert(optionIndex);
-
-    if (optionIndex === null || optionIndex === undefined || optionIndex === '') {
-        alert("Value not passed");
-    }
+    // please remove this if issue is fixed
+    //alert('Inside Select Option');
+    //alert(optionIndex);
+    //if (optionIndex === null || optionIndex === undefined || optionIndex === '') {
+    //   alert("Value not passed");
+    //}
 
     clearTimeout(idleTimeout); // Stop the timeout.
 
     // Read the user's cookies.
     let option = cookieParse("option");
-    alert(option.toString());
+    // please remove this if issue is fixed
+    //alert(option.toString());
 
     option[cookieParse("combination")[index][optionIndex]]++; // Increment the appropriate selection.
     setCookie("option",JSON.stringify(option),5); // Store the user's selections again. 5 days until expiry.
     
     if (optionIndex == 0) {
         let count = parseInt(getCookie("option1")) + 1;
-        alert('option 1 selected');
-        alert(count);
+        // please remove this if issue is fixed
+        //alert('option 1 selected');
+        //alert(count);
         setCookie("option1", count, 5);
         modalEnable(optionIndex); // Display pop-up with the user's selected video.
     } else if (optionIndex == 1) {
         let count = parseInt(getCookie("option2")) + 1;
-        alert('option 2 selected');
-        alert(count);
+        // please remove this if issue is fixed
+        //alert('option 2 selected');
+        //alert(count);
         setCookie("option2", count, 5);
         modalEnable(optionIndex); // Display pop-up with the user's selected video.
         
@@ -115,7 +118,7 @@ window.fillButtons = function fillButtons(){
     // Reset visibility to show options correctly.
     $(".outer").css("display","block")
 
-    // Remove previous event listeners to avoid multiple calls
+    // Remove previous event listeners to avoid multiple calls -- fix for still images
     $("#option1").off('click');
     $("#option2").off('click');
 
@@ -148,9 +151,11 @@ window.fillButtons = function fillButtons(){
         $("iframe").css("pointer-events","none");
 
         // Add listeners to the detectors to check for when the user selects a video.
-        alert('video playback calling select Option ---1');
+        // please remove this if issue is fixed
+        //alert('video playback calling select Option ---1');
         $("#detector1").click(function(){selectOption(0)});
-        alert('video playback calling select Option ---2');
+        // please remove this if issue is fixed
+        //alert('video playback calling select Option ---2');
         $("#detector2").click(function(){selectOption(1)});
     }
     else {
@@ -164,9 +169,11 @@ window.fillButtons = function fillButtons(){
         $("#option2").append(image2);
 
         // Add listeners to the images to check for when the user selects an image.
-        alert('still images calling select Option --1');
+        // please remove this if issue is fixed
+        // alert('still images calling select Option --1');
         $("#option1").click(function(){selectOption(0)});
-        alert('still images calling select Option --2');
+        // please remove this if issue is fixed
+        // alert('still images calling select Option --2');
         $("#option2").click(function(){selectOption(1)});
     }
 }
