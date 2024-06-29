@@ -245,6 +245,7 @@ img iframe {
     max-height: 80%;
     margin-top: 1vh;
     margin-bottom: 1vh;
+    margin-left: 15%;
 }
 
 /* detector positioning, including z-positioning to place them in front of their iframes */
