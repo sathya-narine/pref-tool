@@ -161,8 +161,18 @@ window.fillButtons = function fillButtons(){
     else {
 
         // Create two images with thumbnails from YouTube.
-        let image1 = $("<img>").attr("src","https://i.ytimg.com/vi/" + videos[selection[combination[index][0]]] + "/hqdefault.jpg");
-        let image2 = $("<img>").attr("src","https://i.ytimg.com/vi/" + videos[selection[combination[index][1]]] + "/hqdefault.jpg");
+        // Image presentation mode
+        let image1 = $("<img>").attr({
+        src: "https://i.ytimg.com/vi/" + videos[selection[combination[index][0]]] + "/hqdefault.jpg",
+        width: "560",  // Set width attribute for image
+        height: "315"  // Set height attribute for image
+        });
+        let image2 = $("<img>").attr({
+        src: "https://i.ytimg.com/vi/" + videos[selection[combination[index][1]]] + "/hqdefault.jpg",
+        width: "560",  // Set width attribute for image
+        height: "315"  // Set height attribute for image
+        });
+
 
         // Add the images.
         $("#option1").append(image1);
