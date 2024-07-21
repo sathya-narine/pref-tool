@@ -173,7 +173,12 @@ window.fillButtons = function fillButtons(){
         height: "315"  // Set height attribute for image
         });
 
-
+         // Create and add two detector divs to overlay the images.
+        let detector1 = $("<div></div>").attr("id","detector1");
+        let detector2 = $("<div></div>").attr("id","detector2");
+        $("#option1").append(detector1);
+        $("#option2").append(detector2);
+        
         // Add the images.
         $("#option1").append(image1);
         $("#option2").append(image2);
