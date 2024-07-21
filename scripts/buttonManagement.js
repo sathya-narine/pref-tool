@@ -182,14 +182,22 @@ window.fillButtons = function fillButtons(){
         // Add the images.
         $("#option1").append(image1);
         $("#option2").append(image2);
+        $("image").css("pointer-events","none");
 
+        // old code
         // Add listeners to the images to check for when the user selects an image.
         // please remove this if issue is fixed
         // alert('still images calling select Option --1');
-        $("#option1").click(function(){selectOption(0)});
+        //$("#option1").click(function(){selectOption(0)});
         // please remove this if issue is fixed
         // alert('still images calling select Option --2');
-        $("#option2").click(function(){selectOption(1)});
+        //$("#option2").click(function(){selectOption(1)});
+
+        //new code
+        $("#detector1").click(function(){selectOption(0)});
+        // please remove this if issue is fixed
+        //alert('video playback calling select Option ---2');
+        $("#detector2").click(function(){selectOption(1)});
     }
 }
 
