@@ -140,19 +140,19 @@ window.fillButtons = function fillButtons(){
             allow: "autoplay"
         });
 
-        // Create and add two detector divs to overlay the iframes.
-        let detector1 = $("<div></div>").attr("class","detector");
-        let detector2 = $("<div></div>").attr("class","detector");
-        $("#option1").append(detector1);
-        $("#option2").append(detector2);
+        // Create and add two overlay divs to overlay the iframes.
+        let overlay1 = $("<div></div>").addClass("overlay");
+        let overlay2 = $("<div></div>").addClass("overlay");
+        $("#option1").append(overlay1);
+        $("#option2").append(overlay2);
 
         // Add the iframes and prevent them from being paused by setting pointer-events to none.
         $("#option1").append(iframe1);
         $("#option2").append(iframe2);
         $("iframe").css("pointer-events","none");
 
-        // Add listeners to the detectors to check for when the user selects a video.
-        $(".detector").click(function(e) {
+        // Add listeners to the overlays to check for when the user selects a video.
+        $(".overlay").click(function(e) {
             if ($(e.target).closest("iframe").length === 0) {
                 let optionIndex = $(this).parent().attr("id") === "option1" ? 0 : 1;
                 modalEnable(optionIndex); // Display the modal when clicked outside the iframe.
@@ -175,19 +175,19 @@ window.fillButtons = function fillButtons(){
             height: "315"
         });
 
-        // Create and add two detector divs to overlay the images.
-        let detector1 = $("<div></div>").attr("class","detector");
-        let detector2 = $("<div></div>").attr("class","detector");
-        $("#option1").append(detector1);
-        $("#option2").append(detector2);
+        // Create and add two overlay divs to overlay the images.
+        let overlay1 = $("<div></div>").addClass("overlay");
+        let overlay2 = $("<div></div>").addClass("overlay");
+        $("#option1").append(overlay1);
+        $("#option2").append(overlay2);
 
         // Add the images and prevent pointer events outside the image boundaries.
         $("#option1").append(image1);
         $("#option2").append(image2);
         $("img").css("pointer-events","none");
 
-        // Add listeners to the detectors to check for when the user selects an image.
-        $(".detector").click(function(e) {
+        // Add listeners to the overlays to check for when the user selects an image.
+        $(".overlay").click(function(e) {
             if ($(e.target).closest("img").length === 0) {
                 let optionIndex = $(this).parent().attr("id") === "option1" ? 0 : 1;
                 modalEnable(optionIndex); // Display the modal when clicked outside the image.
