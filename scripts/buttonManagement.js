@@ -106,7 +106,7 @@ window.fillButtons = function fillButtons(){
 
     // If the assessment has completed, move on to the next page.
     if(index >= combination.length){
-        setCookie("end", (new Date().getTime() / 1000), 5) // Saves the epoch timestamp in seconds when the assessment reaches the end.
+        setCookie("end", (new Date().getTime() / 1000), 5); // Saves the epoch timestamp in seconds when the assessment reaches the end.
         window.location.href = "./decision.html";
         return;
     }
@@ -116,7 +116,7 @@ window.fillButtons = function fillButtons(){
     $("#option2").empty();
 
     // Reset visibility to show options correctly.
-    $(".outer").css("display","block")
+    $(".outer").css("display","block");
 
     // Remove previous event listeners to avoid multiple calls
     $("#option1").off('click');
@@ -155,7 +155,9 @@ window.fillButtons = function fillButtons(){
         $(".detector").click(function(e) {
             if ($(e.target).closest("iframe").length === 0) {
                 let optionIndex = $(this).parent().attr("id") === "option1" ? 0 : 1;
-                selectOption(optionIndex);
+                modalEnable(optionIndex); // Display the modal when clicked outside the iframe.
+                clearTimeout(idleTimeout); // Stop the current timeout.
+                idleTimeout = setTimeout(resetButtons, playtimeLength); // Reset buttons after playtimeLength.
             }
         });
     }
@@ -188,7 +190,9 @@ window.fillButtons = function fillButtons(){
         $(".detector").click(function(e) {
             if ($(e.target).closest("img").length === 0) {
                 let optionIndex = $(this).parent().attr("id") === "option1" ? 0 : 1;
-                selectOption(optionIndex);
+                modalEnable(optionIndex); // Display the modal when clicked outside the image.
+                clearTimeout(idleTimeout); // Stop the current timeout.
+                idleTimeout = setTimeout(resetButtons, playtimeLength); // Reset buttons after playtimeLength.
             }
         });
     }
