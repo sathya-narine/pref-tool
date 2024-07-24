@@ -125,7 +125,9 @@ window.fillButtons = function fillButtons(){
     // Check whether the user wants still images or videos.
     if(getCookie("presentation") == "video"){
 
-        // Create two iframes to hold YouTube embeds.
+        // Create two divs for overlay and iframes to hold YouTube embeds.
+        let overlay1 = $("<div></div>").addClass("overlay");
+        let overlay2 = $("<div></div>").addClass("overlay");
         let iframe1 = $("<iframe></iframe>").attr({
             width: "560",
             height: "315",
@@ -140,15 +142,15 @@ window.fillButtons = function fillButtons(){
             allow: "autoplay"
         });
 
-        // Create and add two overlay divs to overlay the iframes.
-        let overlay1 = $("<div></div>").addClass("overlay");
-        let overlay2 = $("<div></div>").addClass("overlay");
+        // Append iframes to overlays.
+        overlay1.append(iframe1);
+        overlay2.append(iframe2);
+
+        // Append overlays to options.
         $("#option1").append(overlay1);
         $("#option2").append(overlay2);
 
         // Add the iframes and prevent them from being paused by setting pointer-events to none.
-        $("#option1").append(iframe1);
-        $("#option2").append(iframe2);
         $("iframe").css("pointer-events","none");
 
         // Add listeners to the overlays to check for when the user selects a video.
@@ -163,6 +165,8 @@ window.fillButtons = function fillButtons(){
     }
     else {
         // Image presentation mode
+        let overlay1 = $("<div></div>").addClass("overlay");
+        let overlay2 = $("<div></div>").addClass("overlay");
         let image1 = $("<img>").attr({
             src: "https://i.ytimg.com/vi/" + videos[selection[combination[index][0]]] + "/hqdefault.jpg",
             width: "560",
@@ -175,15 +179,15 @@ window.fillButtons = function fillButtons(){
             height: "315"
         });
 
-        // Create and add two overlay divs to overlay the images.
-        let overlay1 = $("<div></div>").addClass("overlay");
-        let overlay2 = $("<div></div>").addClass("overlay");
+        // Append images to overlays.
+        overlay1.append(image1);
+        overlay2.append(image2);
+
+        // Append overlays to options.
         $("#option1").append(overlay1);
         $("#option2").append(overlay2);
 
         // Add the images and prevent pointer events outside the image boundaries.
-        $("#option1").append(image1);
-        $("#option2").append(image2);
         $("img").css("pointer-events","none");
 
         // Add listeners to the overlays to check for when the user selects an image.
