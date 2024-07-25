@@ -139,30 +139,12 @@ window.fillButtons = function fillButtons() {
             allow: "autoplay"
         }).css("pointer-events", "none");
 
-        // Create and add two transparent overlays to capture click events.
-        let overlay1 = $("<div></div>").css({
-            position: "absolute",
-            top: 0,
-            left: 0,
-            width: "560px",
-            height: "315px",
-            cursor: "pointer"
-        });
-        let overlay2 = $("<div></div>").css({
-            position: "absolute",
-            top: 0,
-            left: 0,
-            width: "560px",
-            height: "315px",
-            cursor: "pointer"
-        });
+        $("#option1").css("position", "relative").append(iframe1);
+        $("#option2").css("position", "relative").append(iframe2);
 
-        $("#option1").css("position", "relative").append(iframe1).append(overlay1);
-        $("#option2").css("position", "relative").append(iframe2).append(overlay2);
-
-        // Add listeners to the overlays to check for when the user selects a video.
-        overlay1.click(function () { selectOption(0) });
-        overlay2.click(function () { selectOption(1) });
+        // Add listeners to the iframes to check for when the user selects a video.
+        iframe1.click(function () { selectOption(0) });
+        iframe2.click(function () { selectOption(1) });
     } else {
 
         // Create two images with thumbnails from YouTube.
@@ -177,33 +159,14 @@ window.fillButtons = function fillButtons() {
             height: "315"
         }).css("pointer-events", "none");
 
-        // Create and add two transparent overlays to capture click events.
-        let overlay1 = $("<div></div>").css({
-            position: "absolute",
-            top: 0,
-            left: 0,
-            width: "560px",
-            height: "315px",
-            cursor: "pointer"
-        });
-        let overlay2 = $("<div></div>").css({
-            position: "absolute",
-            top: 0,
-            left: 0,
-            width: "560px",
-            height: "315px",
-            cursor: "pointer"
-        });
+        $("#option1").css("position", "relative").append(image1);
+        $("#option2").css("position", "relative").append(image2);
 
-        $("#option1").css("position", "relative").append(image1).append(overlay1);
-        $("#option2").css("position", "relative").append(image2).append(overlay2);
-
-        // Add listeners to the overlays to check for when the user selects an image.
-        overlay1.click(function () { selectOption(0) });
-        overlay2.click(function () { selectOption(1) });
+        // Add listeners to the images to check for when the user selects an image.
+        image1.click(function () { selectOption(0) });
+        image2.click(function () { selectOption(1) });
     }
 }
-
 
 /*
     Input: Either 0 or 1, indicating which option the user selected.
