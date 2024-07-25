@@ -97,7 +97,7 @@ window.resetButtons = function resetButtons(){
 
     Remarks: Get the videos that are for the current assessment and populate the buttons with appropriate options.
 */
-window.fillButtons = function fillButtons() {
+window.fillButtons = function fillButtons(){
 
     // Read the user's cookies.
     let combination = cookieParse("combination");
@@ -105,7 +105,7 @@ window.fillButtons = function fillButtons() {
     let videos = cookieParse("videos2");
 
     // If the assessment has completed, move on to the next page.
-    if (index >= combination.length) {
+    if(index >= combination.length){
         setCookie("end", (new Date().getTime() / 1000), 5) // Saves the epoch timestamp in seconds when the assessment reaches the end.
         window.location.href = "./decision.html";
         return;
@@ -116,14 +116,14 @@ window.fillButtons = function fillButtons() {
     $("#option2").empty();
 
     // Reset visibility to show options correctly.
-    $(".outer").css("display", "block");
+    $(".outer").css("display","block")
 
     // Remove previous event listeners to avoid multiple calls -- fix for still images
     $("#option1").off('click');
     $("#option2").off('click');
 
     // Check whether the user wants still images or videos.
-    if (getCookie("presentation") == "video") {
+    if(getCookie("presentation") == "video"){
 
         // Create two iframes to hold YouTube embeds.
         let iframe1 = $("<iframe></iframe>").attr({
@@ -131,40 +131,60 @@ window.fillButtons = function fillButtons() {
             height: "315",
             src: "https://www.youtube.com/embed/" + videos[selection[combination[index][0]]] + "?autoplay=1&mute=1&controls=0&disablekb=1",
             allow: "autoplay"
-        }).css("cursor", "default");
+                                              })
         let iframe2 = $("<iframe></iframe>").attr({
             width: "560",
             height: "315",
             src: "https://www.youtube.com/embed/" + videos[selection[combination[index][1]]] + "?autoplay=1&mute=1&controls=0&disablekb=1",
             allow: "autoplay"
-        }).css("cursor", "default");
+                                              })
 
-        $("#option1").css("position", "relative").append(iframe1);
-        $("#option2").css("position", "relative").append(iframe2);
+        // Create and add two detector divs to overlay the iframes.
+        let detector1 = $("<div></div>").attr("id","detector1");
+        let detector2 = $("<div></div>").attr("id","detector2");
+        $("#option1").append(detector1);
+        $("#option2").append(detector2);
 
-        // Add listeners to the iframes to check for when the user selects a video.
-        iframe1.click(function () { selectOption(0) });
-        iframe2.click(function () { selectOption(1) });
-    } else {
+        // Add the iframes and prevent them from being paused by setting pointer-events to none.
+        $("#option1").append(iframe1);
+        $("#option2").append(iframe2);
+        $("iframe").css("pointer-events","none");
+
+        // Add listeners to the detectors to check for when the user selects a video.
+        // please remove this if issue is fixed
+        //alert('video playback calling select Option ---1');
+        $("#detector1").click(function(){selectOption(0)});
+        // please remove this if issue is fixed
+        //alert('video playback calling select Option ---2');
+        $("#detector2").click(function(){selectOption(1)});
+    }
+    else {
 
         // Create two images with thumbnails from YouTube.
+        // Image presentation mode
         let image1 = $("<img>").attr({
-            src: "https://i.ytimg.com/vi/" + videos[selection[combination[index][0]]] + "/hqdefault.jpg",
-            width: "560",
-            height: "315"
-        }).css("cursor", "default");
+        src: "https://i.ytimg.com/vi/" + videos[selection[combination[index][0]]] + "/hqdefault.jpg",
+        width: "560",  // Set width attribute for image
+        height: "315"  // Set height attribute for image
+        });
         let image2 = $("<img>").attr({
-            src: "https://i.ytimg.com/vi/" + videos[selection[combination[index][1]]] + "/hqdefault.jpg",
-            width: "560",
-            height: "315"
-        }).css("cursor", "default");
+        src: "https://i.ytimg.com/vi/" + videos[selection[combination[index][1]]] + "/hqdefault.jpg",
+        width: "560",  // Set width attribute for image
+        height: "315"  // Set height attribute for image
+        });
 
-        $("#option1").css("position", "relative").append(image1);
-        $("#option2").css("position", "relative").append(image2);
+
+        // Add the images.
+        $("#option1").append(image1);
+        $("#option2").append(image2);
 
         // Add listeners to the images to check for when the user selects an image.
-        image1.click(function () { selectOption(0) });
-        image2.click(function () { selectOption(1) });
+        // please remove this if issue is fixed
+        // alert('still images calling select Option --1');
+        $("#option1").click(function(){selectOption(0)});
+        // please remove this if issue is fixed
+        // alert('still images calling select Option --2');
+        $("#option2").click(function(){selectOption(1)});
     }
 }
 
