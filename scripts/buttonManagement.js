@@ -131,38 +131,38 @@ window.fillButtons = function fillButtons() {
             height: "315",
             src: "https://www.youtube.com/embed/" + videos[selection[combination[index][0]]] + "?autoplay=1&mute=1&controls=0&disablekb=1",
             allow: "autoplay"
-        });
+        }).css("pointer-events", "none");
         let iframe2 = $("<iframe></iframe>").attr({
             width: "560",
             height: "315",
             src: "https://www.youtube.com/embed/" + videos[selection[combination[index][1]]] + "?autoplay=1&mute=1&controls=0&disablekb=1",
             allow: "autoplay"
-        });
+        }).css("pointer-events", "none");
 
-        // Create and add two detector divs to overlay the iframes.
-        let new_detector1 = $("<div></div>").attr("id", "new_detector1").css({
+        // Create and add two transparent overlays to capture click events.
+        let overlay1 = $("<div></div>").css({
             position: "absolute",
             top: 0,
             left: 0,
-            width: "100%",
-            height: "100%",
-            zIndex: 10
+            width: "560px",
+            height: "315px",
+            cursor: "pointer"
         });
-        let new_detector2 = $("<div></div>").attr("id", "new_detector2").css({
+        let overlay2 = $("<div></div>").css({
             position: "absolute",
             top: 0,
             left: 0,
-            width: "100%",
-            height: "100%",
-            zIndex: 10
+            width: "560px",
+            height: "315px",
+            cursor: "pointer"
         });
-        $("#option1").css("position", "relative").append(new_detector1).append(iframe1);
-        $("#option2").css("position", "relative").append(new_detector2).append(iframe2);
-        $("iframe").css("pointer-events", "none");
 
-        // Add listeners to the detectors to check for when the user selects a video.
-        $("#new_detector1").click(function () { selectOption(0) });
-        $("#new_detector2").click(function () { selectOption(1) });
+        $("#option1").css("position", "relative").append(iframe1).append(overlay1);
+        $("#option2").css("position", "relative").append(iframe2).append(overlay2);
+
+        // Add listeners to the overlays to check for when the user selects a video.
+        overlay1.click(function () { selectOption(0) });
+        overlay2.click(function () { selectOption(1) });
     } else {
 
         // Create two images with thumbnails from YouTube.
@@ -170,39 +170,40 @@ window.fillButtons = function fillButtons() {
             src: "https://i.ytimg.com/vi/" + videos[selection[combination[index][0]]] + "/hqdefault.jpg",
             width: "560",
             height: "315"
-        });
+        }).css("pointer-events", "none");
         let image2 = $("<img>").attr({
             src: "https://i.ytimg.com/vi/" + videos[selection[combination[index][1]]] + "/hqdefault.jpg",
             width: "560",
             height: "315"
-        });
+        }).css("pointer-events", "none");
 
-        // Create and add two detector divs to overlay the images.
-        let new_detector1 = $("<div></div>").attr("id", "new_detector1").css({
+        // Create and add two transparent overlays to capture click events.
+        let overlay1 = $("<div></div>").css({
             position: "absolute",
             top: 0,
             left: 0,
-            width: "100%",
-            height: "100%",
-            zIndex: 10
+            width: "560px",
+            height: "315px",
+            cursor: "pointer"
         });
-        let new_detector2 = $("<div></div>").attr("id", "new_detector2").css({
+        let overlay2 = $("<div></div>").css({
             position: "absolute",
             top: 0,
             left: 0,
-            width: "100%",
-            height: "100%",
-            zIndex: 10
+            width: "560px",
+            height: "315px",
+            cursor: "pointer"
         });
-        $("#option1").css("position", "relative").append(new_detector1).append(image1);
-        $("#option2").css("position", "relative").append(new_detector2).append(image2);
-        $("img").css("pointer-events", "none");
 
-        // Add listeners to the detectors to check for when the user selects an image.
-        $("#new_detector1").click(function () { selectOption(0) });
-        $("#new_detector2").click(function () { selectOption(1) });
+        $("#option1").css("position", "relative").append(image1).append(overlay1);
+        $("#option2").css("position", "relative").append(image2).append(overlay2);
+
+        // Add listeners to the overlays to check for when the user selects an image.
+        overlay1.click(function () { selectOption(0) });
+        overlay2.click(function () { selectOption(1) });
     }
 }
+
 
 /*
     Input: Either 0 or 1, indicating which option the user selected.
