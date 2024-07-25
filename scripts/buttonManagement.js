@@ -116,7 +116,7 @@ window.fillButtons = function fillButtons() {
     $("#option2").empty();
 
     // Reset visibility to show options correctly.
-    $(".outer").css("display", "block")
+    $(".outer").css("display", "block");
 
     // Remove previous event listeners to avoid multiple calls -- fix for still images
     $("#option1").off('click');
@@ -131,28 +131,30 @@ window.fillButtons = function fillButtons() {
             height: "315",
             src: "https://www.youtube.com/embed/" + videos[selection[combination[index][0]]] + "?autoplay=1&mute=1&controls=0&disablekb=1",
             allow: "autoplay"
-        })
+        });
         let iframe2 = $("<iframe></iframe>").attr({
             width: "560",
             height: "315",
             src: "https://www.youtube.com/embed/" + videos[selection[combination[index][1]]] + "?autoplay=1&mute=1&controls=0&disablekb=1",
             allow: "autoplay"
-        })
+        });
 
         // Create and add two detector divs to overlay the iframes.
         let new_detector1 = $("<div></div>").attr("id", "new_detector1").css({
             position: "absolute",
             top: 0,
             left: 0,
-            width: "560px",
-            height: "315px"
+            width: "100%",
+            height: "100%",
+            zIndex: 10
         });
         let new_detector2 = $("<div></div>").attr("id", "new_detector2").css({
             position: "absolute",
             top: 0,
             left: 0,
-            width: "560px",
-            height: "315px"
+            width: "100%",
+            height: "100%",
+            zIndex: 10
         });
         $("#option1").css("position", "relative").append(new_detector1).append(iframe1);
         $("#option2").css("position", "relative").append(new_detector2).append(iframe2);
@@ -180,15 +182,17 @@ window.fillButtons = function fillButtons() {
             position: "absolute",
             top: 0,
             left: 0,
-            width: "560px",
-            height: "315px"
+            width: "100%",
+            height: "100%",
+            zIndex: 10
         });
         let new_detector2 = $("<div></div>").attr("id", "new_detector2").css({
             position: "absolute",
             top: 0,
             left: 0,
-            width: "560px",
-            height: "315px"
+            width: "100%",
+            height: "100%",
+            zIndex: 10
         });
         $("#option1").css("position", "relative").append(new_detector1).append(image1);
         $("#option2").css("position", "relative").append(new_detector2).append(image2);
