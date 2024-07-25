@@ -140,21 +140,19 @@ window.fillButtons = function fillButtons() {
         })
 
         // Create and add two detector divs to overlay the iframes.
-        let new_detector1 = $("<div></div>").attr("id", "detector1").css({
+        let new_detector1 = $("<div></div>").attr("id", "new_detector1").css({
             position: "absolute",
             top: 0,
             left: 0,
             width: "560px",
-            height: "315px",
-            cursor: "pointer"
+            height: "315px"
         });
-        let new_detector2 = $("<div></div>").attr("id", "detector2").css({
+        let new_detector2 = $("<div></div>").attr("id", "new_detector2").css({
             position: "absolute",
             top: 0,
             left: 0,
             width: "560px",
-            height: "315px",
-            cursor: "pointer"
+            height: "315px"
         });
         $("#option1").css("position", "relative").append(new_detector1).append(iframe1);
         $("#option2").css("position", "relative").append(new_detector2).append(iframe2);
@@ -178,21 +176,19 @@ window.fillButtons = function fillButtons() {
         });
 
         // Create and add two detector divs to overlay the images.
-        let new_detector1 = $("<div></div>").attr("id", "detector1").css({
+        let new_detector1 = $("<div></div>").attr("id", "new_detector1").css({
             position: "absolute",
             top: 0,
             left: 0,
             width: "560px",
-            height: "315px",
-            cursor: "pointer"
+            height: "315px"
         });
-        let new_detector2 = $("<div></div>").attr("id", "detector2").css({
+        let new_detector2 = $("<div></div>").attr("id", "new_detector2").css({
             position: "absolute",
             top: 0,
             left: 0,
             width: "560px",
-            height: "315px",
-            cursor: "pointer"
+            height: "315px"
         });
         $("#option1").css("position", "relative").append(new_detector1).append(image1);
         $("#option2").css("position", "relative").append(new_detector2).append(image2);
