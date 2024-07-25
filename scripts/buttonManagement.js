@@ -131,13 +131,13 @@ window.fillButtons = function fillButtons() {
             height: "315",
             src: "https://www.youtube.com/embed/" + videos[selection[combination[index][0]]] + "?autoplay=1&mute=1&controls=0&disablekb=1",
             allow: "autoplay"
-        }).css("pointer-events", "none");
+        }).css("cursor", "default");
         let iframe2 = $("<iframe></iframe>").attr({
             width: "560",
             height: "315",
             src: "https://www.youtube.com/embed/" + videos[selection[combination[index][1]]] + "?autoplay=1&mute=1&controls=0&disablekb=1",
             allow: "autoplay"
-        }).css("pointer-events", "none");
+        }).css("cursor", "default");
 
         $("#option1").css("position", "relative").append(iframe1);
         $("#option2").css("position", "relative").append(iframe2);
@@ -152,12 +152,12 @@ window.fillButtons = function fillButtons() {
             src: "https://i.ytimg.com/vi/" + videos[selection[combination[index][0]]] + "/hqdefault.jpg",
             width: "560",
             height: "315"
-        }).css("pointer-events", "none");
+        }).css("cursor", "default");
         let image2 = $("<img>").attr({
             src: "https://i.ytimg.com/vi/" + videos[selection[combination[index][1]]] + "/hqdefault.jpg",
             width: "560",
             height: "315"
-        }).css("pointer-events", "none");
+        }).css("cursor", "default");
 
         $("#option1").css("position", "relative").append(image1);
         $("#option2").css("position", "relative").append(image2);
