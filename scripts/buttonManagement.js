@@ -106,7 +106,7 @@ window.fillButtons = function fillButtons(){
 
     // If the assessment has completed, move on to the next page.
     if(index >= combination.length){
-        setCookie("end", (new Date().getTime() / 1000), 5); // Saves the epoch timestamp in seconds when the assessment reaches the end.
+        setCookie("end", (new Date().getTime() / 1000), 5) // Saves the epoch timestamp in seconds when the assessment reaches the end.
         window.location.href = "./decision.html";
         return;
     }
@@ -116,89 +116,88 @@ window.fillButtons = function fillButtons(){
     $("#option2").empty();
 
     // Reset visibility to show options correctly.
-    $(".outer").css("display","block");
+    $(".outer").css("display","block")
 
-    // Remove previous event listeners to avoid multiple calls
+    // Remove previous event listeners to avoid multiple calls -- fix for still images
     $("#option1").off('click');
     $("#option2").off('click');
 
     // Check whether the user wants still images or videos.
     if(getCookie("presentation") == "video"){
 
-        // Create two divs for overlay and iframes to hold YouTube embeds.
-        let overlay1 = $("<div></div>").addClass("overlay");
-        let overlay2 = $("<div></div>").addClass("overlay");
+        // Create two iframes to hold YouTube embeds.
         let iframe1 = $("<iframe></iframe>").attr({
             width: "560",
             height: "315",
             src: "https://www.youtube.com/embed/" + videos[selection[combination[index][0]]] + "?autoplay=1&mute=1&controls=0&disablekb=1",
             allow: "autoplay"
-        });
-
+                                              })
         let iframe2 = $("<iframe></iframe>").attr({
             width: "560",
             height: "315",
             src: "https://www.youtube.com/embed/" + videos[selection[combination[index][1]]] + "?autoplay=1&mute=1&controls=0&disablekb=1",
             allow: "autoplay"
-        });
+                                              })
 
-        // Append iframes to overlays.
-        overlay1.append(iframe1);
-        overlay2.append(iframe2);
-
-        // Append overlays to options.
-        $("#option1").append(overlay1);
-        $("#option2").append(overlay2);
+        // Create and add two detector divs to overlay the iframes.
+        let detector1 = $("<div></div>").attr("id","detector1");
+        let detector2 = $("<div></div>").attr("id","detector2");
+        $("#option1").append(detector1);
+        $("#option2").append(detector2);
 
         // Add the iframes and prevent them from being paused by setting pointer-events to none.
+        $("#option1").append(iframe1);
+        $("#option2").append(iframe2);
         $("iframe").css("pointer-events","none");
 
-        // Add listeners to the overlays to check for when the user selects a video.
-        $(".overlay").click(function(e) {
-            if ($(e.target).closest("iframe").length === 0) {
-                let optionIndex = $(this).parent().attr("id") === "option1" ? 0 : 1;
-                modalEnable(optionIndex); // Display the modal when clicked outside the iframe.
-                clearTimeout(idleTimeout); // Stop the current timeout.
-                idleTimeout = setTimeout(resetButtons, playtimeLength); // Reset buttons after playtimeLength.
-            }
-        });
+        // Add listeners to the detectors to check for when the user selects a video.
+        // please remove this if issue is fixed
+        //alert('video playback calling select Option ---1');
+        $("#detector1").click(function(){selectOption(0)});
+        // please remove this if issue is fixed
+        //alert('video playback calling select Option ---2');
+        $("#detector2").click(function(){selectOption(1)});
     }
     else {
+
+        // Create two images with thumbnails from YouTube.
         // Image presentation mode
-        let overlay1 = $("<div></div>").addClass("overlay");
-        let overlay2 = $("<div></div>").addClass("overlay");
         let image1 = $("<img>").attr({
-            src: "https://i.ytimg.com/vi/" + videos[selection[combination[index][0]]] + "/hqdefault.jpg",
-            width: "560",
-            height: "315"
+        src: "https://i.ytimg.com/vi/" + videos[selection[combination[index][0]]] + "/hqdefault.jpg",
+        width: "560",  // Set width attribute for image
+        height: "315"  // Set height attribute for image
         });
-
         let image2 = $("<img>").attr({
-            src: "https://i.ytimg.com/vi/" + videos[selection[combination[index][1]]] + "/hqdefault.jpg",
-            width: "560",
-            height: "315"
+        src: "https://i.ytimg.com/vi/" + videos[selection[combination[index][1]]] + "/hqdefault.jpg",
+        width: "560",  // Set width attribute for image
+        height: "315"  // Set height attribute for image
         });
 
-        // Append images to overlays.
-        overlay1.append(image1);
-        overlay2.append(image2);
+         // Create and add two detector divs to overlay the images.
+        let detector1 = $("<div></div>").attr("id","detector1");
+        let detector2 = $("<div></div>").attr("id","detector2");
+        $("#option1").append(detector1);
+        $("#option2").append(detector2);
+        
+        // Add the images.
+        $("#option1").append(image1);
+        $("#option2").append(image2);
+        $("image").css("pointer-events","none");
 
-        // Append overlays to options.
-        $("#option1").append(overlay1);
-        $("#option2").append(overlay2);
+        // old code
+        // Add listeners to the images to check for when the user selects an image.
+        // please remove this if issue is fixed
+        // alert('still images calling select Option --1');
+        //$("#option1").click(function(){selectOption(0)});
+        // please remove this if issue is fixed
+        // alert('still images calling select Option --2');
+        //$("#option2").click(function(){selectOption(1)});
 
-        // Add the images and prevent pointer events outside the image boundaries.
-        $("img").css("pointer-events","none");
-
-        // Add listeners to the overlays to check for when the user selects an image.
-        $(".overlay").click(function(e) {
-            if ($(e.target).closest("img").length === 0) {
-                let optionIndex = $(this).parent().attr("id") === "option1" ? 0 : 1;
-                modalEnable(optionIndex); // Display the modal when clicked outside the image.
-                clearTimeout(idleTimeout); // Stop the current timeout.
-                idleTimeout = setTimeout(resetButtons, playtimeLength); // Reset buttons after playtimeLength.
-            }
-        });
+        //new code
+        $("#detector1").click(function(){selectOption(0)});
+        // please remove this if issue is fixed
+        //alert('video playback calling select Option ---2');
+        $("#detector2").click(function(){selectOption(1)});
     }
 }
 
