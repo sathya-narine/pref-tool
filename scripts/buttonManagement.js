@@ -97,95 +97,101 @@ window.resetButtons = function resetButtons(){
 
     Remarks: Get the videos that are for the current assessment and populate the buttons with appropriate options.
 */
-window.fillButtons = function fillButtons(){
-
+window.fillButtons = function fillButtons() {
     // Read the user's cookies.
     let combination = cookieParse("combination");
     let selection = cookieParse("selection");
     let videos = cookieParse("videos2");
 
-    // If the assessment has completed, move on to the next page.
-    if(index >= combination.length){
-        setCookie("end", (new Date().getTime() / 1000), 5) // Saves the epoch timestamp in seconds when the assessment reaches the end.
-        window.location.href = "./decision.html";
-        return;
+    // Remove previous event listeners and content
+    $("#option1").empty().off('click');
+    $("#option2").empty().off('click');
+
+    // Read dimensions of iframe or img elements
+    let contentWidth = "560px"; // Default width for iframe or img
+    let contentHeight = "315px"; // Default height for iframe or img
+
+    if (getCookie("presentation") == "video") {
+        // For iframe, get dimensions dynamically
+        contentWidth = "560px"; // Example width for iframe
+        contentHeight = "315px"; // Example height for iframe
+    } else {
+        // For img, get dimensions dynamically
+        contentWidth = "560px"; // Example width for img
+        contentHeight = "315px"; // Example height for img
     }
 
-    // Remove previous selection options.
-    $("#option1").empty();
-    $("#option2").empty();
+    // Create detector divs with matching dimensions
+    let detector1 = $("<div></div>").attr("class", "detector").attr("id", "detector1").css({
+        width: contentWidth,
+        height: contentHeight
+    });
+    let detector2 = $("<div></div>").attr("class", "detector").attr("id", "detector2").css({
+        width: contentWidth,
+        height: contentHeight
+    });
 
-    // Reset visibility to show options correctly.
-    $(".outer").css("display","block")
+    // Append detectors to options
+    $("#option1").append(detector1);
+    $("#option2").append(detector2);
 
-    // Remove previous event listeners to avoid multiple calls -- fix for still images
-    $("#option1").off('click');
-    $("#option2").off('click');
-
-    // Check whether the user wants still images or videos.
-    if(getCookie("presentation") == "video"){
-
-        // Create two iframes to hold YouTube embeds.
+    if (getCookie("presentation") == "video") {
+        // Create iframe elements
         let iframe1 = $("<iframe></iframe>").attr({
-            width: "560",
-            height: "315",
+            width: contentWidth,
+            height: contentHeight,
             src: "https://www.youtube.com/embed/" + videos[selection[combination[index][0]]] + "?autoplay=1&mute=1&controls=0&disablekb=1",
-            allow: "autoplay"
-                                              })
+            allow: "autoplay",
+            class: "content-frame"
+        });
         let iframe2 = $("<iframe></iframe>").attr({
-            width: "560",
-            height: "315",
+            width: contentWidth,
+            height: contentHeight,
             src: "https://www.youtube.com/embed/" + videos[selection[combination[index][1]]] + "?autoplay=1&mute=1&controls=0&disablekb=1",
-            allow: "autoplay"
-                                              })
+            allow: "autoplay",
+            class: "content-frame"
+        });
 
-        // Create and add two detector divs to overlay the iframes.
-        let detector1 = $("<div></div>").attr("id","detector1");
-        let detector2 = $("<div></div>").attr("id","detector2");
-        $("#option1").append(detector1);
-        $("#option2").append(detector2);
-
-        // Add the iframes and prevent them from being paused by setting pointer-events to none.
+        // Append iframes and disable pointer events
         $("#option1").append(iframe1);
         $("#option2").append(iframe2);
-        $("iframe").css("pointer-events","none");
+        $(".content-frame").css("pointer-events", "none");
 
-        // Add listeners to the detectors to check for when the user selects a video.
-        // please remove this if issue is fixed
-        //alert('video playback calling select Option ---1');
-        $("#detector1").click(function(){selectOption(0)});
-        // please remove this if issue is fixed
-        //alert('video playback calling select Option ---2');
-        $("#detector2").click(function(){selectOption(1)});
-    }
-    else {
-
-        // Create two images with thumbnails from YouTube.
-        // Image presentation mode
+        // Enable pointer events on detectors
+        $("#detector1").css("pointer-events", "auto");
+        $("#detector2").css("pointer-events", "auto");
+    } else {
+        // Create image elements
         let image1 = $("<img>").attr({
-        src: "https://i.ytimg.com/vi/" + videos[selection[combination[index][0]]] + "/hqdefault.jpg",
-        width: "560",  // Set width attribute for image
-        height: "315"  // Set height attribute for image
+            src: "https://i.ytimg.com/vi/" + videos[selection[combination[index][0]]] + "/hqdefault.jpg",
+            width: contentWidth,
+            height: contentHeight,
+            class: "content-image"
         });
         let image2 = $("<img>").attr({
-        src: "https://i.ytimg.com/vi/" + videos[selection[combination[index][1]]] + "/hqdefault.jpg",
-        width: "560",  // Set width attribute for image
-        height: "315"  // Set height attribute for image
+            src: "https://i.ytimg.com/vi/" + videos[selection[combination[index][1]]] + "/hqdefault.jpg",
+            width: contentWidth,
+            height: contentHeight,
+            class: "content-image"
         });
 
-
-        // Add the images.
+        // Append images and disable pointer events
         $("#option1").append(image1);
         $("#option2").append(image2);
+        $(".content-image").css("pointer-events", "none");
 
-        // Add listeners to the images to check for when the user selects an image.
-        // please remove this if issue is fixed
-        // alert('still images calling select Option --1');
-        $("#option1").click(function(){selectOption(0)});
-        // please remove this if issue is fixed
-        // alert('still images calling select Option --2');
-        $("#option2").click(function(){selectOption(1)});
+        // Enable pointer events on detectors
+        $("#detector1").css("pointer-events", "auto");
+        $("#detector2").css("pointer-events", "auto");
     }
+
+    // Add click listeners to detectors
+    $("#detector1").click(function () {
+        selectOption(0);
+    });
+    $("#detector2").click(function () {
+        selectOption(1);
+    });
 }
 
 /*
