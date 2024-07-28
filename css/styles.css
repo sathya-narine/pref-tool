@@ -958,3 +958,14 @@ img iframe {
   }
  }
  /*=================== new styling END ==================== */
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 560px; /* Adjust to match iframe width */
+    height: 315px; /* Adjust to match iframe height */
+    background-color: transparent;
+    z-index: 10; /* Ensure the overlay is on top of the iframe */
+    cursor: pointer; /* Change cursor to pointer to indicate clickability */
+}
+
