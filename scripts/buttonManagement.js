@@ -106,7 +106,7 @@ window.fillButtons = function fillButtons(){
 
     // If the assessment has completed, move on to the next page.
     if(index >= combination.length){
-        setCookie("end", (new Date().getTime() / 1000), 5) // Saves the epoch timestamp in seconds when the assessment reaches the end.
+        setCookie("end", (new Date().getTime() / 1000), 5); // Saves the epoch timestamp in seconds when the assessment reaches the end.
         window.location.href = "./decision.html";
         return;
     }
@@ -145,21 +145,31 @@ window.fillButtons = function fillButtons(){
         $("#option1").append(detector1);
         $("#option2").append(detector2);
 
-        // Add the iframes and prevent them from being paused by setting pointer-events to none.
+        // Add the iframes and prevent them from being paused by setting pointer-events to auto.
         $("#option1").append(iframe1);
         $("#option2").append(iframe2);
-        //$("iframe").css("pointer-events","none");
+        $("iframe").css("pointer-events","auto");
 
-        // Add listeners to the detectors to check for when the user selects a video.
-        $("#option1 iframe").click(function() {
-            selectOption(0);
+        // Function to check if click is within iframe bounds
+        function isClickWithinIframe(event, iframe) {
+            let iframeRect = iframe.get(0).getBoundingClientRect();
+            let clickX = event.clientX;
+            let clickY = event.clientY;
+            return (clickX >= iframeRect.left && clickX <= iframeRect.right && clickY >= iframeRect.top && clickY <= iframeRect.bottom);
+        }
+
+        // Add listener to detect clicks within iframes
+        $(document).on("click", "iframe", function(event) {
+            if (isClickWithinIframe(event, $(this))) {
+                if ($(this).parent().attr("id") === "option1") {
+                    selectOption(0);
+                } else if ($(this).parent().attr("id") === "option2") {
+                    selectOption(1);
+                }
+            }
         });
 
-        $("#option2 iframe").click(function() {
-            selectOption(1);
-        });
-    }
-    else {
+    } else {
 
         // Create two images with thumbnails from YouTube.
         let image1 = $("<img>").attr({
@@ -178,16 +188,15 @@ window.fillButtons = function fillButtons(){
         $("#option2").append(image2);
 
         // Add listeners to the images to check for when the user selects an image.
-        $("#option1 img").click(function() {
+        $("#option1").click(function() {
             selectOption(0);
         });
 
-        $("#option2 img").click(function() {
+        $("#option2").click(function() {
             selectOption(1);
         });
     }
 }
-
 
 /*
     Input: Either 0 or 1, indicating which option the user selected.
