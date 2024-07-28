@@ -220,7 +220,7 @@ img iframe {
 .video-column-inner #detector1, .video-column-inner #detector2 {
     margin-top: 15vh;
     margin-bottom: 10vh;
-    margin-left: 21%;
+    #margin-left: 21%;
 }
 
 /* detector positioning for vertical presentation mode 
@@ -245,7 +245,7 @@ img iframe {
     max-height: 80%;
     margin-top: 1vh;
     margin-bottom: 1vh;
-    margin-left: 30%;
+    #margin-left: 30%;
 }
 
 /* detector positioning, including z-positioning to place them in front of their iframes */
