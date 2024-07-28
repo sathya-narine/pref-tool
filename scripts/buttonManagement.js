@@ -97,16 +97,15 @@ window.resetButtons = function resetButtons(){
 
     Remarks: Get the videos that are for the current assessment and populate the buttons with appropriate options.
 */
-window.fillButtons = function fillButtons(){
-
+window.fillButtons = function fillButtons() {
     // Read the user's cookies.
     let combination = cookieParse("combination");
     let selection = cookieParse("selection");
     let videos = cookieParse("videos2");
 
     // If the assessment has completed, move on to the next page.
-    if(index >= combination.length){
-        setCookie("end", (new Date().getTime() / 1000), 5); // Saves the epoch timestamp in seconds when the assessment reaches the end.
+    if (index >= combination.length) {
+        setCookie("end", new Date().getTime() / 1000, 5); // Saves the epoch timestamp in seconds when the assessment reaches the end.
         window.location.href = "./decision.html";
         return;
     }
@@ -116,73 +115,78 @@ window.fillButtons = function fillButtons(){
     $("#option2").empty();
 
     // Reset visibility to show options correctly.
-    $(".outer").css("display","block");
+    $(".outer").css("display", "block");
 
     // Remove previous event listeners to avoid multiple calls
-    $("#option1").off('click');
-    $("#option2").off('click');
+    $("#option1").off("click");
+    $("#option2").off("click");
 
     // Check whether the user wants still images or videos.
-    if(getCookie("presentation") == "video"){
-
+    if (getCookie("presentation") == "video") {
         // Create two iframes to hold YouTube embeds.
         let iframe1 = $("<iframe></iframe>").attr({
             width: "560",
             height: "315",
-            src: "https://www.youtube.com/embed/" + videos[selection[combination[index][0]]] + "?autoplay=1&mute=1&controls=0&disablekb=1",
-            allow: "autoplay"
+            src:
+                "https://www.youtube.com/embed/" +
+                videos[selection[combination[index][0]]] +
+                "?autoplay=1&mute=1&controls=0&disablekb=1",
+            allow: "autoplay",
         });
         let iframe2 = $("<iframe></iframe>").attr({
             width: "560",
             height: "315",
-            src: "https://www.youtube.com/embed/" + videos[selection[combination[index][1]]] + "?autoplay=1&mute=1&controls=0&disablekb=1",
-            allow: "autoplay"
+            src:
+                "https://www.youtube.com/embed/" +
+                videos[selection[combination[index][1]]] +
+                "?autoplay=1&mute=1&controls=0&disablekb=1",
+            allow: "autoplay",
         });
 
-        // Create and add two detector divs to overlay the iframes.
-        let detector1 = $("<div></div>").attr("id","detector1");
-        let detector2 = $("<div></div>").attr("id","detector2");
-        $("#option1").append(detector1);
-        $("#option2").append(detector2);
+        // Create overlay divs for each option
+        let overlay1 = $("<div></div>").addClass("overlay").attr("id", "overlay1");
+        let overlay2 = $("<div></div>").addClass("overlay").attr("id", "overlay2");
 
-        // Add the iframes and prevent them from being paused by setting pointer-events to auto.
-        $("#option1").append(iframe1);
-        $("#option2").append(iframe2);
-        $("iframe").css("pointer-events","auto");
+        // Add the iframes and overlays
+        $("#option1").append(iframe1, overlay1);
+        $("#option2").append(iframe2, overlay2);
 
-        // Function to check if click is within iframe bounds
-        function isClickWithinIframe(event, iframe) {
-            let iframeRect = iframe.get(0).getBoundingClientRect();
+        // Function to check if click is within overlay
+        function isClickWithinOverlay(event, overlay) {
+            let overlayRect = overlay.get(0).getBoundingClientRect();
             let clickX = event.clientX;
             let clickY = event.clientY;
-            return (clickX >= iframeRect.left && clickX <= iframeRect.right && clickY >= iframeRect.top && clickY <= iframeRect.bottom);
+            return (
+                clickX >= overlayRect.left &&
+                clickX <= overlayRect.right &&
+                clickY >= overlayRect.top &&
+                clickY <= overlayRect.bottom
+            );
         }
 
-        // Add listener to detect clicks within iframes
-        $(document).on("click", "iframe", function(event) {
-            if (isClickWithinIframe(event, $(this))) {
-                event.preventDefault(); // Prevent default behavior (playing/pausing the video)
-                alert("Clicked on iframe!");
-                if ($(this).parent().attr("id") === "option1") {
-                    selectOption(0);
-                } else if ($(this).parent().attr("id") === "option2") {
-                    selectOption(1);
-                }
-            }
+        // Add listener to detect clicks within overlays
+        $(".overlay").click(function (event) {
+            let optionIndex = $(this).parent().attr("id") === "option1" ? 0 : 1;
+            selectOption(optionIndex);
         });
 
     } else {
-
         // Create two images with thumbnails from YouTube.
         let image1 = $("<img>").attr({
-            src: "https://i.ytimg.com/vi/" + videos[selection[combination[index][0]]] + "/hqdefault.jpg",
+            src:
+                "https://i.ytimg.com/vi/" +
+                videos[selection[combination[index][0]]] +
+                "/hqdefault.jpg",
             width: "560",
-            height: "315"
+            height: "315",
         });
         let image2 = $("<img>").attr({
-            src: "https://i.ytimg.com/vi/" + videos[selection[combination[index][1]]] + "/hqdefault.jpg",
+            src:
+                "https://i.ytimg.com/vi/" +
+                videos[selection[combination[index][1]]] +
+                "/hqdefault.jpg",
             width: "560",
-            height: "315"
+            height: "315",
         });
 
         // Add the images.
@@ -190,15 +194,16 @@ window.fillButtons = function fillButtons(){
         $("#option2").append(image2);
 
         // Add listeners to the images to check for when the user selects an image.
-        $("#option1").click(function() {
+        $("#option1").click(function () {
             selectOption(0);
         });
 
-        $("#option2").click(function() {
+        $("#option2").click(function () {
             selectOption(1);
         });
     }
-}
+};
+
 
 /*
     Input: Either 0 or 1, indicating which option the user selected.
