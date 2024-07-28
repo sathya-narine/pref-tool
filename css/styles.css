@@ -958,15 +958,3 @@ img iframe {
   }
  }
  /*=================== new styling END ==================== */
-/* detector fix*/
-.content-frame,
-.content-image {
-    pointer-events: none; /* Initially disable pointer events */
-}
-
-.detector {
-    position: absolute;
-    top: 0;
-    left: 0;
-    background-color: rgba(0, 0, 0, 0.1); /* Semi-transparent color for visualization */
-}
