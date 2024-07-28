@@ -148,7 +148,7 @@ window.fillButtons = function fillButtons(){
         // Add the iframes and prevent them from being paused by setting pointer-events to none.
         $("#option1").append(iframe1);
         $("#option2").append(iframe2);
-        $("iframe").css("pointer-events","none");
+        //$("iframe").css("pointer-events","none");
 
         // Add listeners to the detectors to check for when the user selects a video.
         $("#option1 iframe").click(function() {
