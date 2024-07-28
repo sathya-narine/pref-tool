@@ -140,10 +140,10 @@ window.fillButtons = function fillButtons(){
         });
 
         // Create and add two detector divs to overlay the iframes.
-        //let detector1 = $("<div></div>").attr("id","detector1");
-        //let detector2 = $("<div></div>").attr("id","detector2");
-        //$("#option1").append(detector1);
-        //("#option2").append(detector2);
+        let detector1 = $("<div></div>").attr("id","detector1");
+        let detector2 = $("<div></div>").attr("id","detector2");
+        $("#option1").append(detector1);
+        $("#option2").append(detector2);
 
         // Add the iframes and prevent them from being paused by setting pointer-events to auto.
         $("#option1").append(iframe1);
@@ -152,7 +152,6 @@ window.fillButtons = function fillButtons(){
 
         // Function to check if click is within iframe bounds
         function isClickWithinIframe(event, iframe) {
-            alert('clicked');
             let iframeRect = iframe.get(0).getBoundingClientRect();
             let clickX = event.clientX;
             let clickY = event.clientY;
@@ -161,8 +160,9 @@ window.fillButtons = function fillButtons(){
 
         // Add listener to detect clicks within iframes
         $(document).on("click", "iframe", function(event) {
-            alert("Clicked on iframe!");
             if (isClickWithinIframe(event, $(this))) {
+                event.preventDefault(); // Prevent default behavior (playing/pausing the video)
+                alert("Clicked on iframe!");
                 if ($(this).parent().attr("id") === "option1") {
                     selectOption(0);
                 } else if ($(this).parent().attr("id") === "option2") {
