@@ -146,6 +146,12 @@ window.fillButtons = function fillButtons(){
         let detector2 = $("<div></div>").attr("id","detector2").css({
             backgroundColor: "rgba(0, 255, 0, 0.5)"
         });
+        // Adjust detector position dynamically based on iframe margin-left
+        let iframeMarginLeft = $(".video-column-inner iframe").css("margin-left");
+        detector1.css("margin-left", iframeMarginLeft);
+        detector2.css("margin-left", iframeMarginLeft);
+        alert('value is');
+        alert(iframeMarginLeft);
         $("#option1").append(detector1);
         $("#option2").append(detector2);
 
