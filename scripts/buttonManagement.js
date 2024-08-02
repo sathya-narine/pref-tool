@@ -147,19 +147,23 @@ window.fillButtons = function fillButtons(){
             backgroundColor: "rgba(0, 255, 0, 0.5)"
         });
 
-         // Adjust detector position dynamically based on screen width
+         
+        // Adjust detector position dynamically based on screen width
         let screenWidth = window.innerWidth;
+        let screenHeight = window.innerHeight;
         let marginLeft;
         if (screenWidth >= 1200) {
             marginLeft = '20.75%';
-        } else if (screenWidth >= 992) {
+        } else if (screenWidth >= 992 && screenWidth < 1200) {
             marginLeft = '15%';
-        } else if (screenWidth >= 768) {
+        } else if ((screenWidth === 1280 && screenHeight === 950) || (screenWidth === 950 && screenHeight === 1280)) {
+            marginLeft = '10%';
+        } else if (screenWidth >= 768 && screenWidth < 992) {
             marginLeft = '10%';
         } else {
             marginLeft = '5%';
         }
-
+        
         detector1.css("margin-left", marginLeft);
         detector2.css("margin-left", marginLeft);
         
