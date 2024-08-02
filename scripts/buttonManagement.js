@@ -146,12 +146,23 @@ window.fillButtons = function fillButtons(){
         let detector2 = $("<div></div>").attr("id","detector2").css({
             backgroundColor: "rgba(0, 255, 0, 0.5)"
         });
-        // Adjust detector position dynamically based on iframe margin-left
-        let iframeMarginLeft = $(".video-column-inner iframe").css("margin-left");
-        detector1.css("margin-left", iframeMarginLeft);
-        detector2.css("margin-left", iframeMarginLeft);
-        alert('value is');
-        alert(iframeMarginLeft);
+
+         // Adjust detector position dynamically based on screen width
+        let screenWidth = window.innerWidth;
+        let marginLeft;
+        if (screenWidth >= 1200) {
+            marginLeft = '20.75%';
+        } else if (screenWidth >= 992) {
+            marginLeft = '15%';
+        } else if (screenWidth >= 768) {
+            marginLeft = '10%';
+        } else {
+            marginLeft = '5%';
+        }
+
+        detector1.css("margin-left", marginLeft);
+        detector2.css("margin-left", marginLeft);
+        
         $("#option1").append(detector1);
         $("#option2").append(detector2);
 
