@@ -127,61 +127,45 @@ window.fillButtons = function fillButtons(){
 
         // Create two iframes to hold YouTube embeds.
         let iframe1 = $("<iframe></iframe>").attr({
-            width: "560",
-            height: "315",
+            //width: "560",
+            //height: "315",
+            class: frame1,
             src: "https://www.youtube.com/embed/" + videos[selection[combination[index][0]]] + "?autoplay=1&mute=1&controls=0&disablekb=1",
             allow: "autoplay"
                                               })
         let iframe2 = $("<iframe></iframe>").attr({
-            width: "560",
-            height: "315",
+            //width: "560",
+            //height: "315",
+            class: frame2,
             src: "https://www.youtube.com/embed/" + videos[selection[combination[index][1]]] + "?autoplay=1&mute=1&controls=0&disablekb=1",
             allow: "autoplay"
                                               })
 
         // Create and add two detector divs to overlay the iframes.
-        let detector1 = $("<div></div>").attr("id","detector1").css({
+        let detector1 = $("<div></div>").attr("class","detector1").css({
             backgroundColor: "rgba(255, 0, 0, 0.5)"
         });
-        let detector2 = $("<div></div>").attr("id","detector2").css({
+        let detector2 = $("<div></div>").attr("class","detector2").css({
             backgroundColor: "rgba(0, 255, 0, 0.5)"
         });
 
-         
-        // Adjust detector position dynamically based on screen width
-        let screenWidth = window.innerWidth;
-        let screenHeight = window.innerHeight;
-        let marginLeft;
-        if (screenWidth >= 1200) {
-            marginLeft = '20.75%';
-        } else if (screenWidth >= 992 && screenWidth < 1200) {
-            marginLeft = '15%';
-        } else if ((screenWidth === 1280 && screenHeight === 950) || (screenWidth === 950 && screenHeight === 1280)) {
-            marginLeft = '10%';
-        } else if (screenWidth >= 768 && screenWidth < 992) {
-            marginLeft = '10%';
-        } else {
-            marginLeft = '5%';
-        }
         
-        detector1.css("margin-left", marginLeft);
-        detector2.css("margin-left", marginLeft);
-        
-        $("#option1").append(detector1);
-        $("#option2").append(detector2);
 
         // Add the iframes and prevent them from being paused by setting pointer-events to none.
         $("#option1").append(iframe1);
         $("#option2").append(iframe2);
         $("iframe").css("pointer-events","none");
 
+        $(".frame1").append(detector1);
+        $(".frame2").append(detector2);
+
         // Add listeners to the detectors to check for when the user selects a video.
         // please remove this if issue is fixed
         //alert('video playback calling select Option ---1');
-        $("#detector1").click(function(){selectOption(0)});
+        $(".detector1").click(function(){selectOption(0)});
         // please remove this if issue is fixed
         //alert('video playback calling select Option ---2');
-        $("#detector2").click(function(){selectOption(1)});
+        $(".detector2").click(function(){selectOption(1)});
     }
     else {
 
