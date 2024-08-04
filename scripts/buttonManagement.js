@@ -123,51 +123,44 @@ window.fillButtons = function fillButtons(){
     $("#option2").off('click');
 
     // Check whether the user wants still images or videos.
-    if(getCookie("presentation") == "video"){
-
+    if (getCookie("presentation") == "video") {
         // Create two iframes to hold YouTube embeds.
         let iframe1 = $("<iframe></iframe>").attr({
-            //width: "560",
-            //height: "315",
-            class: iframe1,
-            id: iframe1,
+            // width: "560",
+            // height: "315",
+            class: "iframe1",
+            id: "iframe1",
             src: "https://www.youtube.com/embed/" + videos[selection[combination[index][0]]] + "?autoplay=1&mute=1&controls=0&disablekb=1",
             allow: "autoplay"
-                                              })
+        });
         let iframe2 = $("<iframe></iframe>").attr({
-            //width: "560",
-            //height: "315",
-            class: iframe2,
-            id: iframe2,
+            // width: "560",
+            // height: "315",
+            class: "iframe2",
+            id: "iframe2",
             src: "https://www.youtube.com/embed/" + videos[selection[combination[index][1]]] + "?autoplay=1&mute=1&controls=0&disablekb=1",
             allow: "autoplay"
-                                              })
+        });
 
         // Create and add two detector divs to overlay the iframes.
-        let detector1 = $("<div></div>").attr("class","detector1").css({
+        let detector1 = $("<div></div>").attr("class", "detector1").css({
             backgroundColor: "rgba(255, 0, 0, 0.5)"
         });
-        let detector2 = $("<div></div>").attr("class","detector2").css({
+        let detector2 = $("<div></div>").attr("class", "detector2").css({
             backgroundColor: "rgba(0, 255, 0, 0.5)"
         });
-
-        
 
         // Add the iframes and prevent them from being paused by setting pointer-events to none.
         $("#option1").append(iframe1);
         $("#option2").append(iframe2);
-        $("iframe").css("pointer-events","none");
+        $("iframe").css("pointer-events", "none");
 
         $("#iframe1").append(detector1);
         $("#iframe2").append(detector2);
 
         // Add listeners to the detectors to check for when the user selects a video.
-        // please remove this if issue is fixed
-        //alert('video playback calling select Option ---1');
-        $(".detector1").click(function(){selectOption(0)});
-        // please remove this if issue is fixed
-        //alert('video playback calling select Option ---2');
-        $(".detector2").click(function(){selectOption(1)});
+        $(".detector1").click(function () { selectOption(0) });
+        $(".detector2").click(function () { selectOption(1) });
     }
     else {
 
