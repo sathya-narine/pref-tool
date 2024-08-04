@@ -132,12 +132,16 @@ window.fillButtons = function fillButtons(){
         let iframe1 = $("<iframe></iframe>").attr({
             class: "frame",
             src: "https://www.youtube.com/embed/" + videos[selection[combination[index][0]]] + "?autoplay=1&mute=1&controls=0&disablekb=1",
-            allow: "autoplay"
+            allow: "autoplay",
+            width: "560",  // Set width attribute
+            height: "315"  // Set height attribute
         });
         let iframe2 = $("<iframe></iframe>").attr({
             class: "frame",
             src: "https://www.youtube.com/embed/" + videos[selection[combination[index][1]]] + "?autoplay=1&mute=1&controls=0&disablekb=1",
-            allow: "autoplay"
+            allow: "autoplay",
+            width: "560",  // Set width attribute
+            height: "315"  // Set height attribute
         });
 
         // Create two detectors to overlay the iframes.
