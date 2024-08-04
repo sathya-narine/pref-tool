@@ -130,6 +130,7 @@ window.fillButtons = function fillButtons(){
             //width: "560",
             //height: "315",
             class: frame1,
+            id: frame1,
             src: "https://www.youtube.com/embed/" + videos[selection[combination[index][0]]] + "?autoplay=1&mute=1&controls=0&disablekb=1",
             allow: "autoplay"
                                               })
@@ -137,6 +138,7 @@ window.fillButtons = function fillButtons(){
             //width: "560",
             //height: "315",
             class: frame2,
+            id: frame2,
             src: "https://www.youtube.com/embed/" + videos[selection[combination[index][1]]] + "?autoplay=1&mute=1&controls=0&disablekb=1",
             allow: "autoplay"
                                               })
@@ -156,8 +158,8 @@ window.fillButtons = function fillButtons(){
         $("#option2").append(iframe2);
         $("iframe").css("pointer-events","none");
 
-        $(".frame1").append(detector1);
-        $(".frame2").append(detector2);
+        $("#frame1").append(detector1);
+        $("#frame2").append(detector2);
 
         // Add listeners to the detectors to check for when the user selects a video.
         // please remove this if issue is fixed
