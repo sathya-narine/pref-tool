@@ -957,28 +957,44 @@ img iframe {
   }
  }
  /*=================== new styling END ==================== */
-.iframe1 {
-    width: 100%;
-    height: 100%;
+/* Sample fix styles */
+.empty {
+  height: 30px;
+  background-color: green;
+  width: 100%;
 }
 
-.detector1 {
-    position: absolute;
-    width: 100%;
-    height: 300px; /* Adjust the height as needed */
-    top: 50%; /* Center vertically */
-    transform: translateY(-50%);
+.holder {
+  width: 100%;
+  height: 300px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  background-color: yellow;
 }
 
-.iframe2 {
-    width: 100%;
-    height: 100%;
+.wrapper {
+  position: relative;
+  width: 30%; /* Adjust the width as needed for each wrapper */
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0 10%; /* Increase the margin to create more space between the wrappers */
 }
 
-.detector2 {
-    position: absolute;
-    width: 100%;
-    height: 300px; /* Adjust the height as needed */
-    top: 50%; /* Center vertically */
-    transform: translateY(-50%);
+.frame {
+  width: 100%;
+  height: 100%;
+  background-color: blue;
+}
+
+.bar {
+  position: absolute;
+  width: 100%;
+  height: 300px; /* Adjust the height as needed */
+  background-color: red;
+  top: 50%; /* Center vertically */
+  transform: translateY(-50%);
 }
